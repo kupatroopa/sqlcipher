@@ -197,10 +197,13 @@ fi
 ##########
 # Which crypto library do we use
 #
+
+AC_MSG_RESULT([Wayyyyyyyyyy])
 AC_ARG_WITH([crypto-lib],
 AC_HELP_STRING([--with-crypto-lib],[Specify which crypto library to use]),
 crypto_lib=$withval)
 AC_MSG_CHECKING([for crypto library to use])
+echo "Warning: Warning: Warning: "
 if test "$crypto_lib" = "none"; then
   AC_MSG_RESULT([none])
 else
@@ -222,12 +225,21 @@ else
         AC_MSG_RESULT([nss3])
         AC_CHECK_LIB([nss3], [PK11_Decrypt], ,
                      AC_MSG_ERROR([Library crypto not found. Install nss!"]))
-      else
-        CFLAGS="$CFLAGS -DSQLCIPHER_CRYPTO_OPENSSL"
-        BUILD_CFLAGS="$BUILD_CFLAGS -DSQLCIPHER_CRYPTO_OPENSSL"
-	      AC_MSG_RESULT([openssl])
-        AC_CHECK_LIB([crypto], [HMAC_Init_ex], ,
-                     AC_MSG_ERROR([Library crypto not found. Install openssl!"]))
+      # else
+      #   if test "$crypto_lib" = "boringssl"; then
+      #     CFLAGS="$CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+      #     BUILD_CFLAGS="$BUILD_CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+      #     AC_MSG_RESULT([boringssl])
+      #     echo "Warning: Warning: Warning: "
+      #     AC_CHECK_LIB([crypto], [HMAC_Init_ex], ,
+      #                 AC_MSG_ERROR([Library crypto not found. Install BoringSSL!"]))
+        else
+          CFLAGS="$CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+          BUILD_CFLAGS="$BUILD_CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+          AC_MSG_RESULT([boringssl])
+          AC_CHECK_LIB([crypto], [HMAC_Init_ex], ,
+                      AC_MSG_ERROR([Library crypto not found. Install BoringSSL!"]))
+        fi
       fi
     fi
   fi

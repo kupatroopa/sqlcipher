@@ -11998,7 +11998,7 @@ fi
 if test "${with_crypto_lib+set}" = set; then :
   withval=$with_crypto_lib; crypto_lib=$withval
 fi
-
+echo Helllllo$crypto_lib
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for crypto library to use" >&5
 $as_echo_n "checking for crypto library to use... " >&6; }
 if test "$crypto_lib" = "none"; then
@@ -12117,15 +12117,16 @@ else
 fi
 
       else
-        CFLAGS="$CFLAGS -DSQLCIPHER_CRYPTO_OPENSSL"
-        BUILD_CFLAGS="$BUILD_CFLAGS -DSQLCIPHER_CRYPTO_OPENSSL"
-	      { $as_echo "$as_me:${as_lineno-$LINENO}: result: openssl" >&5
-$as_echo "openssl" >&6; }
+        echo $LIBS
+        CFLAGS="$CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+        BUILD_CFLAGS="$BUILD_CFLAGS -DSQLCIPHER_CRYPTO_BORINGSSL"
+	      { $as_echo "$as_me:${as_lineno-$LINENO}: result: boringSSL" >&5
+$as_echo "boringSSL" >&6; }
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for HMAC_Init_ex in -lcrypto" >&5
 $as_echo_n "checking for HMAC_Init_ex in -lcrypto... " >&6; }
 if ${ac_cv_lib_crypto_HMAC_Init_ex+:} false; then :
   $as_echo_n "(cached) " >&6
-else
+ else 
   ac_check_lib_save_LIBS=$LIBS
 LIBS="-lcrypto  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
@@ -12155,6 +12156,11 @@ rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
+echo $LIBS
+echo NOOOOOO >&6
+echo $ac_cv_lib_crypto_HMAC_Init_ex
+echo ${as_lineno-$LINENO}
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_HMAC_Init_ex" >&5
 $as_echo "$ac_cv_lib_crypto_HMAC_Init_ex" >&6; }
 if test "x$ac_cv_lib_crypto_HMAC_Init_ex" = xyes; then :
@@ -12165,7 +12171,7 @@ _ACEOF
   LIBS="-lcrypto $LIBS"
 
 else
-  as_fn_error $? "Library crypto not found. Install openssl!\"" "$LINENO" 5
+ as_fn_error $? "Library crypto not found. Install openssl!\"" "$LINENO" 5
 fi
 
       fi
