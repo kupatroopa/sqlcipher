@@ -73,9 +73,8 @@ void sqlite3pager_reset(Pager *pPager);
 
 #if !defined (SQLCIPHER_CRYPTO_CC) \
    && !defined (SQLCIPHER_CRYPTO_LIBTOMCRYPT) \
-   && !defined (SQLCIPHER_CRYPTO_NSS) \
-   && !defined (SQLCIPHER_CRYPTO_OPENSSL)
-#define SQLCIPHER_CRYPTO_OPENSSL
+   && !defined (SQLCIPHER_CRYPTO_NSS) 
+#define SQLCIPHER_CRYPTO_BORINGSSL
 #endif
 
 #define FILE_HEADER_SZ 16
@@ -236,6 +235,7 @@ void sqlcipher_exportFunc(sqlite3_context *, int, sqlite3_value **);
 /* crypto_impl.c functions */
 
 void sqlcipher_init_memmethods(void);
+sqlcipher_provider* sqlcipher_get_provider(void);
 
 /* activation and initialization */
 void sqlcipher_activate(void);
