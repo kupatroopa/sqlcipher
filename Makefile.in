@@ -146,10 +146,10 @@ LTLINK_EXTRAS += $(GCOV_LDFLAGS$(USE_GCOV))
 CRYPTOLIBOBJ = \
   crypto.lo \
   crypto_impl.lo \
-  crypto_openssl.lo \
   crypto_libtomcrypt.lo \
   crypto_nss.lo \
-  crypto_cc.lo
+  crypto_cc.lo \
+  crypto_boringssl.lo
 
 CRYPTOSRC = \
   $(TOP)/src/crypto.h \
@@ -158,8 +158,8 @@ CRYPTOSRC = \
   $(TOP)/src/crypto_impl.c \
 	$(TOP)/src/crypto_libtomcrypt.c \
 	$(TOP)/src/crypto_nss.c \
-	$(TOP)/src/crypto_openssl.c \
-	$(TOP)/src/crypto_cc.c
+	$(TOP)/src/crypto_cc.c \
+  $(TOP)/src/crypto_boringssl.c
 
 # END CRYPTO
 
@@ -831,14 +831,14 @@ crypto.lo:	$(TOP)/src/crypto.c $(HDR)
 	$(LTCOMPILE) -c $(TOP)/src/crypto.c
 crypto_impl.lo:	$(TOP)/src/crypto_impl.c $(HDR)
 	$(LTCOMPILE) -c $(TOP)/src/crypto_impl.c
-crypto_openssl.lo:	$(TOP)/src/crypto_openssl.c $(HDR)
-	$(LTCOMPILE) -c $(TOP)/src/crypto_openssl.c
 crypto_nss.lo:	$(TOP)/src/crypto_nss.c $(HDR)
 	$(LTCOMPILE) -c $(TOP)/src/crypto_nss.c
 crypto_libtomcrypt.lo:	$(TOP)/src/crypto_libtomcrypt.c $(HDR)
 	$(LTCOMPILE) -c $(TOP)/src/crypto_libtomcrypt.c
 crypto_cc.lo:	$(TOP)/src/crypto_cc.c $(HDR)
 	$(LTCOMPILE) -c $(TOP)/src/crypto_cc.c
+crypto_boringssl.lo:	$(TOP)/src/crypto_boringssl.c $(HDR)
+	$(LTCOMPILE) -c $(TOP)/src/crypto_boringssl.c
 # END CRYPTO
 
 # Rules to build individual *.o files from files in the src directory.

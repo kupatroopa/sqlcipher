@@ -387,8 +387,8 @@ foreach file {
    crypto_impl.c
    crypto_libtomcrypt.c
    crypto_nss.c
-   crypto_openssl.c
    crypto_cc.c
+   crypto_boringssl.c
 
    walker.c
    resolve.c
